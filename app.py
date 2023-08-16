@@ -41,7 +41,7 @@ FlaskInstrumentor().instrument_app(app)
 connection = connect("flask-spanner-hello-world", "flask-spanner-hello-world")
 connection.autocommit = True
 
-# HTTP heathcheck
+# HTTP healthcheck
 @app.route('/healthz')  # healthcheck endpoint
 @metrics.do_not_track()  # exclude from prom metrics
 def i_am_healthy():
