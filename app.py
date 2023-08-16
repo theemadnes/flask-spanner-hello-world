@@ -50,9 +50,10 @@ def i_am_healthy():
 @app.route('/spanner-test')
 def spanner_test():
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM Example")
+    cursor.execute("SELECT * FROM Example WHERE id = 1")
     rows = cursor.fetchall()
-    return (rows) # just get the first record
+    # return ('Record: {}\n'.format(rows[0])) # just get the first record
+    return jsonify(rows[0])
 
 # default HTTP service
 @app.route('/', defaults={'path': ''})
@@ -62,6 +63,5 @@ def home(path):
     
 if __name__ == '__main__':
 
-    app.run(
-            host='0.0.0.0', port=int(os.environ.get('PORT', 8080)),
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8080)),
             threaded=True)
